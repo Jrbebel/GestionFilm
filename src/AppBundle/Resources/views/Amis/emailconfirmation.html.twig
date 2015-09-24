@@ -1,0 +1,74 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <p>
+        <h3>Bonjour, {{User.username}} souhaite que vous deveniez son amis cinématographique.</h3></br>
+    </p>     
+
+    <img style="padding: 4px;
+         line-height: 1.42857143;
+         background-color: #ffffff;
+         border: 1px solid #dddddd;
+         border-radius: 4px;
+         -webkit-transition: all 0.2s ease-in-out;
+         transition: all 0.2s ease-in-out;
+         display: inline-block;
+         max-width: 100%;
+         height: auto;
+         float: left;
+         " src="http://ns332299.ip-37-187-123.eu/dev/gestionmultimedia/web/uploads/profile/{{User.path}}" alt="photo profil" height="130px" width="130px">
+
+    <div style="  ">
+
+        <a style="color: #ffffff; background-color: #428bca; border-color: #357ebd;display: inline-block;
+           margin-bottom: 0;
+           font-weight: normal;
+           text-align: center;
+           vertical-align: middle;
+           cursor: pointer;
+           background-image: none;
+           border: 1px solid transparent;
+           white-space: nowrap;
+           padding: 6px 12px;
+           font-size: 14px;
+           line-height: 1.42857143;
+           border-radius: 4px;
+           -webkit-user-select: none;
+           -moz-user-select: none;
+           -ms-user-select: none;
+           -o-user-select: none;
+           user-select: none;
+           margin-left:  20px;
+           margin-top: 50px;
+           text-decoration:none; 
+           " type="button" target="_blank" class="btn btn-primary" href='http://ns332299.ip-37-187-123.eu/dev/gestionmultimedia/web/app.php/Amis/AjoutConfirm?id={{User.id}}'  target="_blank" >Accepter</a>
+
+
+        <a style="color: #ffffff; background-color: #428bca; border-color: #357ebd;display: inline-block;
+           margin-bottom: 0;
+           font-weight: normal;
+           text-align: center;
+           vertical-align: middle;
+           cursor: pointer;
+           background-image: none;
+           border: 1px solid transparent;
+           white-space: nowrap;
+           padding: 6px 12px;
+           font-size: 14px;
+           line-height: 1.42857143;
+           border-radius: 4px;
+           -webkit-user-select: none;
+           -moz-user-select: none;
+           -ms-user-select: none;
+           -o-user-select: none;
+           user-select: none;
+           margin-top: 50px;
+           text-decoration:none; 
+           " type="button" class="btn btn-primary" href='http://ns332299.ip-37-187-123.eu/dev/gestionmultimedia/web/app.php/Amis/Delete?id={{User.id}}'  target="_blank" >Refuser</a>
+    </div>
+</body>
+
+
+</html>

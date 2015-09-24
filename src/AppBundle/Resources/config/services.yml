@@ -1,0 +1,34 @@
+## YAML Template.
+
+services:
+    
+    appbundle_user.profile.form.type:
+        class: AppBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: appbundle_user }
+     
+    appbundle_user.form.handler.profile:
+        class: AppBundle\Form\Handler\ProfileFormHandler
+        arguments: [@fos_user.profile.form, @request, @fos_user.user_manager]
+        scope: request
+        public: false      
+        
+    appbundle_amis.type.issue_selector:
+        class: AppBundle\Form\Type\AmisType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: issue_selector }    
+            
+            
+    friend : 
+        class : AppBundle\Service\Friends
+        arguments : [@request_stack,@doctrine.orm.entity_manager,@security.context]       
+        
+        
+    gestionfriend: 
+        class : AppBundle\DoctrineListener\FriendEvt
+        arguments : [@request_stack,@service_container,@mailer,@security.token_storage]
+        tags: 
+             - { name: doctrine.event_listener, event: postPersist ,method: postPersist }
+   

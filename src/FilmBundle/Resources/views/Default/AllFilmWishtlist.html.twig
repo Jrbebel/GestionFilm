@@ -1,0 +1,29 @@
+{% extends "SiteBundle:Default:home.html.twig" %}
+
+{% block body %}
+
+    {% if responses is empty %}
+
+        <div class="alert alert-success" role="alert">
+           
+            <p>Vous n'avez encore aucun film dans votre liste de souhait</p>
+    </div>
+
+{% endif %}
+
+{% for response in responses %}
+
+    <div class="col-xs-6 col-md-3">
+
+                 <a href="{{path('Filmotheque_Details',{'id':response.id,'type' : type})}}"> 
+ <img class="image" src="http://image.tmdb.org/t/p/w185{{response.poster_path}}" alt="..." width="185px" height="278px">
+                 </a>
+        <div class="caption">
+            <p></p>
+                {#    <a href="#" class="btn btn-default" role="button">Button</a> #}
+     
+        </div>
+
+    </div>
+{%endfor%}
+{% endblock %}

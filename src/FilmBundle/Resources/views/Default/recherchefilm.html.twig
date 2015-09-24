@@ -1,0 +1,33 @@
+{% extends "SiteBundle:Default:home.html.twig" %}
+
+
+{% block body %}
+    {% if responses is not iterable  %}
+        <div class="alert alert-info" role="alert">{{responses}}</div>  
+    {% else %}
+        {% for response in responses %}
+
+
+
+            <div class="col-xs-6 col-md-3">
+                {% if response.poster_path is not empty%}
+                    <a href="{{path('Filmotheque_Details',{'id':response.id,'type' : 3 })}}" > 
+                        <img class="image" src="http://image.tmdb.org/t/p/w185{{response.poster_path}}" alt="..." width="185px" height="278px">
+                    </a>
+                {% else %}
+                    <a href="{{path('Filmotheque_Details',{'id':response.id,'type' : 3 })}}" > 
+
+                        <img class="image" src="{{asset('bundles/film/img/inconnu.jpeg')}}" alt="..." width="185px" height="278px">
+                    </a>
+                {% endif %}
+                <div class="caption">
+                    <p></p>
+
+                    {#    <a href="#" class="btn btn-default" role="button">Button</a> #}
+                    </p>
+                </div>
+
+            </div>
+        {%endfor%}
+    {% endif %}
+{% endblock %}

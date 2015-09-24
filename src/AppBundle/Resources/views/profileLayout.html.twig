@@ -1,0 +1,17 @@
+
+{% extends "SiteBundle:Default:home.html.twig"%}
+
+{% block menu %}
+              <div class="list-group">
+            
+                        <a href="{{path('fos_user_profile_show')}}" class="list-group-item ">
+                            Mon profil
+                        </a>
+                        <a href="{{path('Filmotheque_All')}}" class="list-group-item ">
+                            Mes adresses
+                        </a>
+                          <a href="{{path('index_friend')}}" class="list-group-item ">
+                            Mes amis
+                        </a>    
+                    </div> 
+{% endblock menu %}

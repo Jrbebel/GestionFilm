@@ -1,0 +1,35 @@
+{% extends "SiteBundle:Default:home.html.twig" %}
+
+
+{% block body %}
+   
+    {% if responses is empty %}
+
+        <div class="alert alert-success" role="alert">
+            <p> <h4>Bonjour {{app.user.username}},</h4>
+            <p>Bienvenue sur votre gestionnaire de film, le gestionnaire qui vous permet d'avoir une trace sur les films que vous avez déja regardé.</p>
+            Commencez par ajouter un de vos film visionné en la recherchant dans le champs de recherche situé en dans la barre d'acceuil en haut. </p>
+        </div>
+
+    {% endif %}
+
+    {% for response in responses %}
+    
+ <div class="col-md-3">
+    
+       <a href="{{path('Filmotheque_Details',{'id':response.id})}}" > 
+           <img class="image" src="http://image.tmdb.org/t/p/w185{{response.poster_path}}" alt="..." width="185px" height="278px">
+       </a>
+           <div class="caption">
+          <p></p>
+  
+      </div>
+
+ </div>
+{%endfor%}
+    
+    {% endblock %}
+
+
+
+   

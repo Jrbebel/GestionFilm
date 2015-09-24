@@ -1,0 +1,106 @@
+
+{% extends "SiteBundle:Default:home.html.twig" %}
+
+
+{% block body %}
+
+    <div class="media">
+        <div class="media-left media-middle">
+            <a href="#">
+                <img src="http://image.tmdb.org/t/p/w185{{response.poster_path}}" alt="..." width="185px" height="278px">
+
+            </a>
+        </div>
+
+        <div class="media-body">
+            <div>
+
+                {%if ispresent %}
+
+                    <a  class="btn btn-default" role="button">Film ajouté</a>  
+                    <a role="btn btn-danger" class="btn btn-danger" href="{{path('Filmotheque_delete_favoris',{'idmovies': response.id})}}" >Supprimer</a>    
+
+
+                {%else%}
+                    {% if type == 2 %} 
+                        <a  class="btn btn-primary" href="{{path('Filmotheque_Ajouter',{'idMovies': response.id,'type': type})}}" role="button">Ajouter film</a>  
+                    {%else%}
+                        <a  class="btn btn-primary" href="{{path('Filmotheque_Ajouter',{'idMovies': response.id})}}" role="button">Ajouter film</a>  
+
+                    {%endif%}
+
+                {%endif%}
+
+                {% if type == 3 %} 
+
+                    <a class="btn btn-default" role="button" href='{{path('Filmotheque_Ajouter_wishlist',{'idMovies' : response.id ,'wishlist': 1  })}}'>Ajouter "A voir"</a>
+
+                {%endif%}
+
+                <button class="btn btn-primary" type="submit">Partagez</button>    
+                {% for video in trailer %}        <button class="btn btn-primary " data-toggle="modal" data-target="#myModal{{loop.index}}" type="submit">Trailer{{loop.index}}</button>
+                {% endfor %}    </div>
+                <h3>{{response.title}}</h3>
+            <br>
+            <p class="media-headingtext-left ">{{response.overview}}</p>
+
+        </div>
+    </div>
+    <br>
+    <p>  
+        Genre :
+        {% for categorie in response.genres %}
+            <span class="label label-primary"> {{categorie.name}}</span>
+
+        {% endfor %}
+    </p>
+    <p>
+        Companie de production :
+        {% for categorie in response.production_companies %}
+
+            <span class="label label-primary"> {{categorie.name}}</span>
+
+        {% endfor %}
+    </p>
+    <p>
+        Pays de production :
+        {% for categorie in response.production_countries %}
+            <span class="label label-success"> {{categorie.name}}</span>
+
+        {% endfor %}
+    </p>
+    <p>
+        Date de sortie : {{response.release_date|date('d-m-Y')}}
+
+    </p>
+
+
+    {% for video in trailer %}
+
+        <div class="modal fade" id="myModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+
+
+                    <div class="modal-body">
+                        <div class="bs-example" data-example-id="responsive-embed-16by9-iframe-youtube">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{video.key}}" allowfullscreen autoplay=1 ></iframe>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': 'foo'} %}
+    <a name="fb_share" type="box_count" share_url="http://37.187.123.100/dev/gestionmultimedia/web/app.php"></a>
+    <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+
+
+
+{% endblock %}

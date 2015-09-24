@@ -1,0 +1,25 @@
+services :
+    film_service:
+       class : FilmBundle\Service\ServiceFilmotheque
+       arguments : [@doctrine.orm.entity_manager,@security.context]
+    filmAll_service:
+       class : FilmBundle\Service\AllFilm
+       arguments : [@doctrine.orm.entity_manager,@security.context]   
+    film_service_details : 
+        class : FilmBundle\Service\DetailsMovies
+        arguments : [@request_stack,@doctrine.orm.entity_manager]
+    film_service_ajouter : 
+        class : FilmBundle\Service\AjouterMovies
+        arguments : [@request_stack,@doctrine.orm.entity_manager,@security.context]   
+    film_service_recherche : 
+        class : FilmBundle\Service\RechercheFilm
+        arguments : [@request_stack]
+    film_delete:
+       class : FilmBundle\Service\DeleteMovies
+       arguments : [@doctrine.orm.entity_manager,@request_stack]    
+       
+    gestionwishlist: 
+        class : FilmBundle\DoctrineListener\FilmEvt
+        arguments : [@request_stack,@service_container,@mailer,@security.token_storage]
+        tags: 
+             - { name: doctrine.event_listener, event: postPersist ,method: postPersist }   

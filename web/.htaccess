@@ -1,0 +1,5 @@
+<Ifmodule !mod_rewrite.c>
+LoadModule rewrite_module modules/mod_rewrite.so
+<IfModule>
+RewriteEngine on
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]

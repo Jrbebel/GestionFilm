@@ -1,0 +1,122 @@
+{% extends "AppBundle::profileLayout.html.twig" %}
+{% block stylecss %}
+    {{parent()}}
+
+    {% stylesheets '@AppBundle/Resources/public/css/jquery-ui.min.css'
+                    '@AppBundle/Resources/public/css/jquery-ui.structure.min.css'
+                      '@AppBundle/Resources/public/css/jquery-ui.theme.min.css'  
+    %}
+
+
+
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+
+    {% endstylesheets %}
+{% endblock %} 
+{% block body %}
+    {% include 'AppBundle:Amis:AmisAttente.html.twig'%}
+    {% include 'AppBundle:Amis:Mesamis.html.twig'%}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Rechercher un ami</div>
+        <div class="panel-body">
+
+            <div class="media-body">
+
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Recherche Amis</label>
+                        <input type="text" class="form-control" id="recherchefriend" name="friend" placeholder="surnom de votre amis">
+                    </div>
+
+                </form>
+                <div id="amis" class='row'></div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock body %}
+
+
+{% block javascript %}
+    {{parent()}}
+    {% javascripts '@SiteBundle/Resources/public/js/jquery-ui.min.js'
+                   '@SiteBundle/Resources/public/js/bootstrap.min.js' 
+    
+    %}
+
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+
+    {% endjavascripts %}
+
+
+    <script>
+
+        var touche = -1;
+
+        $('input#recherchefriend').autocomplete({
+            source: function (requete, reponse) { // les deux arguments représentent les données nécessaires au plugin
+
+                $.ajax({
+                    url: '{{path('search_friend')}}', // on appelle le script JSON
+
+                    dataType: 'json', // on spécifie bien que le type de données est en JSON
+
+                    data: {
+                        friend: $('#recherchefriend').val(), // on donne la chaîne de caractère tapée dans le champ de recherche
+
+
+
+                    },
+                    success: function (donnee, data) {
+
+                        $('div#amis').empty();
+
+
+                        reponse($.map(donnee, function (objet) {
+        {#                                if($('p').text() === ''){
+                                                                            $('p').empty();
+
+            }#}
+                                    if (touche > 0) {
+                                        console.log(touche)
+
+                                    }
+                                    $.each(objet, function (index, value) {
+
+                                        if (index == 'Username') {
+
+                                            $('div#amis').prepend('<div class=col-sm-3 col-md-4><div class="thumbnail"><img  height=130px; width=130px; src=../../uploads/profile/' + objet.Path + ' alt="..." <div class="caption"> <h4>' + objet.Username + '</h4> <p><a href=/GestionFilm/web/app_dev.php/Amis/Ajout?id=' + objet.Id + ' class="btn btn-primary" role="button">Ajouter</a> </p> </div></div></div>');
+
+
+                                        }
+
+                                        // console.log('My array has at position ' + index + ', this value: ' + value +"object"+objet.Username);
+                                    });
+
+
+
+
+
+
+
+//$('p').prepend(' <div class=row><div class=col-sm-6 col-md-4><div class="thumbnail"><img src="..." alt="..." <div class="caption"> <h3>Thumbnail label</h3>  <p>...</p><p><a href="" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> </div></div></div></div>');
+
+
+
+
+                                }));
+
+                            }
+
+                        });
+
+                    }
+
+                });
+
+    </script>
+{% endblock %}
+

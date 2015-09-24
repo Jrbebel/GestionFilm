@@ -1,0 +1,5 @@
+## YAML Template.
+---
+Rest_User : 
+  type : rest
+  resource: "@ApiBundle/Resources/config/routing_rest.yml"
