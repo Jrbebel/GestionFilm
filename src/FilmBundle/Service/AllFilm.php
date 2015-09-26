@@ -35,8 +35,12 @@ class AllFilm {
             curl_multi_exec($mh, $running);
         } while ($running);
         foreach ($mymovies as $key => $value) {
+                        
+
             $data = curl_multi_getcontent($ch[$key]);
+           
             $responses[$key] = json_decode($data);
+           
         }
 
         curl_multi_close($mh);
@@ -51,7 +55,7 @@ class AllFilm {
         $responses = array();
         $mh = curl_multi_init();
         foreach ($mymovies as $key => $value) {
-            $ch[$key] = curl_init("http://api.themoviedb.org/3/movie/" . $value->getIdmovies() . "?api_key=c7eb74475a1e3d62a7ab838d184bf0a7");
+            $ch[$key] = curl_init("http://api.themoviedb.org/3/movie/" . $value->getIdmovies() . "?api_key=c7eb74475a1e3d62a7ab838d184bf0a7&language=fr");
             curl_setopt($ch[$key], CURLOPT_RETURNTRANSFER, true);
             curl_multi_add_handle($mh, $ch[$key]);
         }
@@ -61,6 +65,7 @@ class AllFilm {
             curl_multi_exec($mh, $running);
         } while ($running);
         foreach ($mymovies as $key => $value) {
+    
             $data = curl_multi_getcontent($ch[$key]);
             $responses[$key] = json_decode($data);
         }

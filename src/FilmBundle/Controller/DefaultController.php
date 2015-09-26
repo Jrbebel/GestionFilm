@@ -28,7 +28,7 @@ class DefaultController extends Controller {
     public function AllwishtMovies() {
 
         $data = $this->container->get('filmAll_service')->FindAllWhistmovies();
-
+ 
         return array("responses" => $data, 'type' => 2);
     }
 
@@ -39,7 +39,7 @@ class DefaultController extends Controller {
     public function AllMovies() {
 
         $data = $this->container->get('filmAll_service')->FindAllmovies();
-
+//       s \Doctrine\Common\Util\Debug::dump($data);
         return array("responses" => $data, 'type' => 1);
     }
 

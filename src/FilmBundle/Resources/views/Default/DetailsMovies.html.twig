@@ -38,7 +38,7 @@
                 {%endif%}
 
                 <button class="btn btn-primary" type="submit">Partagez</button>    
-                {% for video in trailer %}        <button class="btn btn-primary " data-toggle="modal" data-target="#myModal{{loop.index}}" type="submit">Trailer{{loop.index}}</button>
+                {% for video in trailer %}        <button class="btn btn-primary " data-toggle="modal" data-target="#myModal{{loop.index}}" type="submit" data-backdrop="false" >Trailer{{loop.index}}</button>
                 {% endfor %}    </div>
                 <h3>{{response.title}}</h3>
             <br>
@@ -81,7 +81,10 @@
             <div class="modal-dialog">
                 <div class="modal-content">
 
-
+ <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Bande d'annonce</h4>
+      </div>
 
                     <div class="modal-body">
                         <div class="bs-example" data-example-id="responsive-embed-16by9-iframe-youtube">
